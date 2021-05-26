@@ -25,5 +25,5 @@ Christoffer Winterkvist, christoffer@winterkvist.com
 
 ## License
 
-**LaunchArguments** is available under the MIT license. See the [LICENSE](https://github.com/zenangst/LaunchArguments/blob/master/LICENSE.md) file for more info.
+**Apps** is available under the MIT license. See the [LICENSE](https://github.com/zenangst/LaunchArguments/blob/master/LICENSE.md) file for more info.
 
