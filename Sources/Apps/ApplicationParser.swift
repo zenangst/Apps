@@ -28,7 +28,7 @@ public final class ApplicationParser {
 
     guard let resolvedBundleName = bundleName else { return nil }
 
-    let keys = ["CFBundleIconFile", "CFBundleIconName"]
+    let keys = ["CFBundleIconFile", "CFBundleIconName", "CFBundleIcons"]
     guard checkDictionary(dictionary: infoDictionary, for: keys) else { return nil }
 
     var application = Application(bundleIdentifier: bundleIdentifier,
