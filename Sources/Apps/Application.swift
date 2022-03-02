@@ -1,7 +1,7 @@
 import Cocoa
 
-public struct Application: Identifiable, Codable, Hashable {
-  public struct Metadata: Hashable {
+public struct Application: Identifiable, Codable, Hashable, Sendable {
+  public struct Metadata: Hashable, Sendable {
     public var isAgent: Bool = false
     public var isElectron: Bool = false
   }
