@@ -29,10 +29,11 @@ public class ApplicationController {
     let applicationDirectoryND = URL(fileURLWithPath: "/Network/Developer/Applications")
     let applicationDirectoryS = URL(fileURLWithPath: "/Users/Shared/Applications")
     let systemApplicationsDirectory = URL(fileURLWithPath: "/System/Applications")
+    let preboot = URL(fileURLWithPath: "/System/Volumes/Preboot/Cryptexes/App/System/Applications")
 
     urls.append(contentsOf: [applicationDirectoryD, applicationDirectoryN,
                              applicationDirectoryND, applicationDirectoryS,
-                             systemApplicationsDirectory])
+                             systemApplicationsDirectory, preboot])
 
     return urls
   }
