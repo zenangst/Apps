@@ -35,3 +35,6 @@ xcuserdata/
 # Local config
 *.local.plist
 *-local.js
+
+*.xcodeproj
+*.xcworkspace

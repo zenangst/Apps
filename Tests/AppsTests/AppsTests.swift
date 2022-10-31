@@ -11,6 +11,11 @@ class AppsTests: XCTestCase {
     XCTAssertNotNil( applications.first(where: { $0.bundleIdentifier == "com.apple.finder" }) )
   }
 
+  func testLoadingApplicationsAsync() async {
+    let applications = await ApplicationController.load()
+    XCTAssertNotNil( applications.first(where: { $0.bundleIdentifier == "com.apple.finder" }) )
+  }
+
   func testAsyncLoadingApplications() {
     let expectation = self.expectation(description: "Wait for application parsing to complete")
     ApplicationController.asyncLoadApplications()

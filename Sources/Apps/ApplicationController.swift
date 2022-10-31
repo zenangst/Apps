@@ -38,6 +38,13 @@ public class ApplicationController {
     return urls
   }
 
+  static public func load() async -> [Application] {
+      FileIndexController(urls: commonPaths())
+          .index(match: match(_:),
+                 handler: ApplicationParser().process(_:),
+                 postHandler: postHandler(_:))
+  }
+
   static public func asyncLoadApplications() -> AnyPublisher<[Application], Never> {
     FileIndexController(urls: commonPaths())
       .asyncIndex(match: match(_:),
