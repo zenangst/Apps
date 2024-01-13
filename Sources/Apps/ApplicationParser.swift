@@ -43,6 +43,7 @@ public final class ApplicationParser {
 
     application.metadata.isElectron = isElectron
     application.metadata.isAgent = infoDictionary["LSUIElement"] != nil
+    application.metadata.isSafariWebApp = application.bundleIdentifier.hasPrefix("com.apple.Safari.WebApp.")
 
     return application
   }

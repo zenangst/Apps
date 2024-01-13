@@ -4,6 +4,7 @@ public struct Application: Identifiable, Codable, Hashable, Sendable {
   public struct Metadata: Codable, Hashable, Sendable {
     public var isAgent: Bool = false
     public var isElectron: Bool = false
+    public var isSafariWebApp: Bool = false
   }
 
   public var id: String { bundleIdentifier }
@@ -27,6 +28,7 @@ public struct Application: Identifiable, Codable, Hashable, Sendable {
     case bundleIdentifier
     case bundleName
     case path
+    case metadata
   }
 
   public init(from decoder: Decoder) throws {
@@ -35,6 +37,7 @@ public struct Application: Identifiable, Codable, Hashable, Sendable {
     self.bundleIdentifier = try container.decode(String.self, forKey: .bundleIdentifier)
     self.bundleName = try container.decode(String.self, forKey: .bundleName)
     self.path = try container.decode(String.self, forKey: .path)
+    self.metadata = (try? container.decodeIfPresent(Metadata.self, forKey: .metadata)) ?? Metadata()
     self.displayName = FileManager().displayName(atPath: path)
   }
 
