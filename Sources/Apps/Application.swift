@@ -12,7 +12,7 @@ public struct Application: Identifiable, Codable, Hashable, Sendable {
   public let bundleName: String
   public let path: String
   public var metadata: Metadata = Metadata()
-  public private(set) var displayName: String = ""
+  public var displayName: String { FileManager().displayName(atPath: path) }
 
   public init(bundleIdentifier: String,
               bundleName: String,
@@ -21,7 +21,6 @@ public struct Application: Identifiable, Codable, Hashable, Sendable {
     self.bundleIdentifier = bundleIdentifier
     self.bundleName = bundleName
     self.path = path
-    self.displayName = displayName ?? FileManager().displayName(atPath: path)
   }
 
   enum CodingKeys: String, CodingKey {
@@ -38,7 +37,6 @@ public struct Application: Identifiable, Codable, Hashable, Sendable {
     self.bundleName = try container.decode(String.self, forKey: .bundleName)
     self.path = try container.decode(String.self, forKey: .path)
     self.metadata = (try? container.decodeIfPresent(Metadata.self, forKey: .metadata)) ?? Metadata()
-    self.displayName = FileManager().displayName(atPath: path)
   }
 
   public static func ==(lhs: Application, rhs: Application) -> Bool {

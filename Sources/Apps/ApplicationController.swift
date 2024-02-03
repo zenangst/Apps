@@ -65,6 +65,6 @@ public class ApplicationController {
   }
 
   private static func postHandler(_ applications: [Application]) -> [Application] {
-    applications.sorted(by: { $0.displayName.lowercased() < $1.displayName.lowercased() })
+    applications.sorted(by: { $0.bundleName.lowercased() < $1.bundleName.lowercased() })
   }
 }
