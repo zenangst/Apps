@@ -39,6 +39,13 @@ public struct Application: Identifiable, Codable, Hashable, Sendable {
     self.metadata = (try? container.decodeIfPresent(Metadata.self, forKey: .metadata)) ?? Metadata()
   }
 
+  public func encode(to encoder: any Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(self.bundleIdentifier, forKey: .bundleIdentifier)
+    try container.encode(self.bundleName, forKey: .bundleName)
+    try container.encode(self.path, forKey: .path)
+  }
+
   public static func ==(lhs: Application, rhs: Application) -> Bool {
     lhs.bundleIdentifier == rhs.bundleIdentifier &&
     lhs.bundleName == rhs.bundleName &&
