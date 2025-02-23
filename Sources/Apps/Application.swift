@@ -7,7 +7,7 @@ public struct Application: Identifiable, Codable, Hashable, Sendable {
     public var isSafariWebApp: Bool = false
   }
 
-  public var id: String { bundleIdentifier }
+  public var id: String { path }
   public let bundleIdentifier: String
   public let bundleName: String
   public let path: String
