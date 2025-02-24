@@ -33,6 +33,7 @@ public final class ApplicationParser {
 
     var application = Application(bundleIdentifier: bundleIdentifier,
                                   bundleName: resolvedBundleName,
+                                  displayName: FileManager().displayName(atPath: bundle.bundlePath),
                                   path: bundle.bundlePath)
 
     var isElectron: Bool = false

@@ -12,7 +12,7 @@ public struct Application: Identifiable, Codable, Hashable, Sendable {
   public let bundleName: String
   public let path: String
   public var metadata: Metadata = Metadata()
-  public var displayName: String { FileManager().displayName(atPath: path) }
+  public var displayName: String
 
   public init(bundleIdentifier: String,
               bundleName: String,
@@ -20,12 +20,14 @@ public struct Application: Identifiable, Codable, Hashable, Sendable {
               path: String) {
     self.bundleIdentifier = bundleIdentifier
     self.bundleName = bundleName
+    self.displayName = displayName ?? bundleName
     self.path = path
   }
 
   enum CodingKeys: String, CodingKey {
     case bundleIdentifier
     case bundleName
+    case displayName
     case path
     case metadata
   }
@@ -37,6 +39,12 @@ public struct Application: Identifiable, Codable, Hashable, Sendable {
     self.bundleName = try container.decode(String.self, forKey: .bundleName)
     self.path = try container.decode(String.self, forKey: .path)
     self.metadata = (try? container.decodeIfPresent(Metadata.self, forKey: .metadata)) ?? Metadata()
+
+    do {
+      self.displayName = try container.decode(String.self, forKey: .displayName)
+    } catch {
+      self.displayName = FileManager.default.displayName(atPath: self.path)
+    }
   }
 
   public func encode(to encoder: any Encoder) throws {
@@ -44,6 +52,7 @@ public struct Application: Identifiable, Codable, Hashable, Sendable {
     try container.encode(self.bundleIdentifier, forKey: .bundleIdentifier)
     try container.encode(self.bundleName, forKey: .bundleName)
     try container.encode(self.path, forKey: .path)
+    try container.encode(self.displayName, forKey: .displayName)
   }
 
   public static func ==(lhs: Application, rhs: Application) -> Bool {
